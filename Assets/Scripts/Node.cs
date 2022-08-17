@@ -8,8 +8,9 @@ public class Node : MonoBehaviour
     public float X_COOR;
     public float Y_COOR;
     public int Value;
+    public bool state;
     private SpriteRenderer _sP;
-    List<Sprite> SpriteList = new List<Sprite>();
+    public List<Sprite> SpriteList = new List<Sprite>();
 
 
     public void SetCOOR(float x, float y)
@@ -21,7 +22,12 @@ public class Node : MonoBehaviour
     {
         Value = v;
     }
-    
+    public void SetState(bool SS)
+    {
+        state = SS;
+    }
+
+
 
     public void Upgrade()    
     {

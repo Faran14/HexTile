@@ -6,10 +6,10 @@ using TMPro;
 
 public class TouchPhaseDisplay : MonoBehaviour
 {
-    public TMP_Text PhaseDisplayText;
+    public TMP_Text DirectionText;
     private Touch _theTouch;
-    private float _timeTouchedEnded;
-    private float _displayTime =0.5f;
+    private string _direction;
+    private Vector2 _touchStartPosition, _touchEndPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,23 +22,37 @@ public class TouchPhaseDisplay : MonoBehaviour
         if (Input.touchCount>0)
         {
             _theTouch = Input.GetTouch(0);
-            if (_theTouch.phase== TouchPhase.Ended)
+            if (_theTouch.phase == TouchPhase.Began)
             {
-                PhaseDisplayText.text = _theTouch.phase.ToString();
-                _timeTouchedEnded = Time.time;
+                _touchStartPosition = _theTouch.position;
             }
-            else if (Time.time - _timeTouchedEnded>_displayTime)
+            else if (_theTouch.phase == TouchPhase.Moved || _theTouch.phase == TouchPhase.Ended)
             {
-                PhaseDisplayText.text = _theTouch.phase.ToString();
-                _timeTouchedEnded = Time.time;
+                _touchEndPosition = _theTouch.position;
+
+                float x = _touchEndPosition.x - _touchStartPosition.x;
+                float y = _touchEndPosition.y - _touchStartPosition.y;
+
+                if (Mathf.Abs(x) == 0 && Mathf.Abs(y) == 0)
+                {
+                    _direction = "Tapped";
+                }
+
+                else if (Mathf.Abs(x) > Mathf.Abs(y))
+                {
+                    _direction = x > 0 ? "Right" : "Left";
+                }
+
+                else
+                {
+                    _direction = y > 0 ? "Up" : "Down";
+                }
             }
 
-        }
-        else if (Time.time - _timeTouchedEnded > _displayTime)
-        {
-            PhaseDisplayText.text = " ";
+
         }
 
+        DirectionText.text = _direction;
 
     }
 }
