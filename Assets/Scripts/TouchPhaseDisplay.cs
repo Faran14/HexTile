@@ -10,12 +10,14 @@ public class TouchPhaseDisplay : MonoBehaviour
     private Touch _theTouch;
     private string _direction;
     private Vector2 _touchStartPosition, _touchEndPosition;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Vector2 _postion;
+    private Camera _camera;
+    private RaycastHit2D _hitInfo;
 
+    private void Start()
+    {
+        _camera = Camera.main;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -25,7 +27,16 @@ public class TouchPhaseDisplay : MonoBehaviour
             if (_theTouch.phase == TouchPhase.Began)
             {
                 _touchStartPosition = _theTouch.position;
+                _postion = _camera.ScreenToWorldPoint(_touchStartPosition);
+                _hitInfo = Physics2D.Raycast(_postion, _camera.transform.forward, Mathf.Infinity);
+                if (!_hitInfo.collider)
+                {
+                    Debug.Log("WAAAAAAAAAAH COLLIDER NOT DETECTED!!!!!!");
+                    return;
+                }
+                
             }
+            
             else if (_theTouch.phase == TouchPhase.Moved || _theTouch.phase == TouchPhase.Ended)
             {
                 _touchEndPosition = _theTouch.position;
