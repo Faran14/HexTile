@@ -9,6 +9,7 @@ public class BoardBuider : MonoBehaviour
     private float _yOffset;
     public float SizeRows;
     public float SizeColumns;
+    private Node H;
 
     private void Start()
     {
@@ -36,6 +37,9 @@ public class BoardBuider : MonoBehaviour
 
                 GameObject Hex = (GameObject)Instantiate(HexPrefab, new Vector2(FinalRowPos, column * _yOffset), Quaternion.identity);
                 Hex.name = "Hex " + row + ", " + column;
+                H = Hex.gameObject.GetComponent<Node>();
+                H.SetCOOR(row,column);
+                H.SetVal(0);
                 Hex.transform.SetParent(this.transform);
             }
 
