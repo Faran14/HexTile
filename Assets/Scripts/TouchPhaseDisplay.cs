@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class TouchPhaseDisplay : MonoBehaviour
 {
     public TMP_Text DirectionText;
@@ -13,6 +14,11 @@ public class TouchPhaseDisplay : MonoBehaviour
     public Vector2 _postion;
     private Camera _camera;
     private RaycastHit2D _hitInfo;
+    private Vector2 _originalPosition;
+    private Vector2 _newPostion;
+    private float _distance;
+    public Node SingleHex;
+    //public GameObject DoubleHex;
 
     private void Start()
     {
@@ -41,23 +47,69 @@ public class TouchPhaseDisplay : MonoBehaviour
             {
                 _touchEndPosition = _theTouch.position;
 
-                float x = _touchEndPosition.x - _touchStartPosition.x;
-                float y = _touchEndPosition.y - _touchStartPosition.y;
+                float x = _camera.ScreenToWorldPoint(_touchEndPosition).x - _camera.ScreenToWorldPoint(_touchStartPosition).x;
+                float y = _camera.ScreenToWorldPoint(_touchEndPosition).y - _camera.ScreenToWorldPoint(_touchStartPosition).y;
 
                 if (Mathf.Abs(x) == 0 && Mathf.Abs(y) == 0)
                 {
                     _direction = "Tapped";
-                }
+                    if (_hitInfo.collider && _hitInfo.collider.CompareTag("Tile"))
+                    {
+                        Debug.Log("Found Tile");
+                    }
 
-                else if (Mathf.Abs(x) > Mathf.Abs(y))
-                {
-                    _direction = x > 0 ? "Right" : "Left";
+
                 }
 
                 else
                 {
-                    _direction = y > 0 ? "Up" : "Down";
+                    //_direction = x > 0 ? "Right" : "Left";
+                    if (_hitInfo.collider && _hitInfo.collider.CompareTag("Tile"))
+                    {
+
+                        //if (x > 0)
+                        //{
+                        //    //move right
+                        //    Debug.Log("Tile Right");
+                        //}
+                        //else
+                        //{ //move left
+                        //    Debug.Log("Tile Left");
+                        //}
+                        Debug.Log("Tile Move");
+                        _originalPosition = _hitInfo.collider.transform.localPosition;
+                        Debug.Log(_originalPosition);
+                        _newPostion.x = _originalPosition.x + (x);
+                        _newPostion.y = _originalPosition.y + (y);
+                        
+                        Debug.Log(_newPostion);
+                        _distance = Vector2.Distance(_originalPosition, _newPostion);
+                        if (_newPostion.x<4.5 && _newPostion.x>-0.5 && _newPostion.y>-4.5 && _newPostion.y<4.4 )
+                        {
+
+                            //_hitInfo.collider.transform.position = Vector3.Lerp(_originalPosition, _postion, Time.deltaTime*2+_distance);
+                            SingleHex.Move(_originalPosition,_newPostion,_distance);
+                        }
+                    }
                 }
+
+                //else
+                //{
+                //    //_direction = y > 0 ? "Up" : "Down";
+                //    if (_hitInfo.collider && _hitInfo.collider.CompareTag("Tile"))
+                //    {
+
+                //        if (y > 0)
+                //        {
+                //            //move up
+                //            Debug.Log("Tile Up");
+                //        }
+                //        else
+                //        { //move down
+                //            Debug.Log("Tile Down");
+                //        }
+                //    }
+                //}
             }
 
 
@@ -66,4 +118,10 @@ public class TouchPhaseDisplay : MonoBehaviour
         DirectionText.text = _direction;
 
     }
+
+
+    //private void Move()
+    //{
+
+    //}
 }

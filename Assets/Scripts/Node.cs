@@ -11,6 +11,7 @@ public class Node : MonoBehaviour
     public bool state;
     private SpriteRenderer _sP;
     public List<Sprite> SpriteList = new List<Sprite>();
+    public Vector2 EndPos;
 
 
     public void SetCOOR(float x, float y)
@@ -38,4 +39,10 @@ public class Node : MonoBehaviour
 
 
     }
+
+    public void Move(Vector2 start, Vector2 end,float dis)
+    {
+        gameObject.transform.position = Vector3.Lerp(start, end, Time.deltaTime * 2 + dis);
+    }
+
 }
