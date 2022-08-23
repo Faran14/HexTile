@@ -9,11 +9,14 @@ public class Inputs : MonoBehaviour, IInputState
     public Vector2 WorldPos;
     private Touch _touch;
     private IInput _input;
+    private Vector2 _touchArea;
+    private Camera _cam;
 
 
     public void Initialize(Tray input)
     {
         _input = input;
+        _cam = input._cam;
         ChangeState(new IdleInputState(this, input));
     }
 
@@ -28,20 +31,21 @@ public class Inputs : MonoBehaviour, IInputState
         if (Input.touchCount > 0)
         {
             _touch = Input.GetTouch(0);
+            _touchArea = _cam.ScreenToWorldPoint(_touch.position);
             if (_touch.phase==TouchPhase.Began)
             {
                 //Debug.Log("Touch Begin");
-                _state.Begin();
+                _state.Begin(_touchArea);
             }
             else if (_touch.phase== TouchPhase.Moved)
             {
                 //Debug.Log("Touch Move");
-                _state.Move();
+                _state.Move(_touch);
             }
             else if (_touch.phase == TouchPhase.Ended)
             {
                 //Debug.Log("Touch End");
-                _state.End();
+                _state.End(_touch);
             }
 
 

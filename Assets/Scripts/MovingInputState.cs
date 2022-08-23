@@ -8,20 +8,23 @@ public class MovingInputState : InputState
     {
 
     }
-    public override void Begin()
+    public override void Begin(Vector2 pos)
     {
         //throw new System.NotImplementedException();
     }
-    public override void Move()
+    public override void Move(Touch _touch)
     {
         //base.Move();
         //Drag Move
         //throw new System.NotImplementedException();
+        Input.DragStart(_touch);
     }
-    public override void End()
+    public override void End(Touch _touch)
     {
         //base.End();
         //Drag End
+        //Input.DragEnd(_touch);
+        Input.Snap(_touch);
         Listner.ChangeState(new IdleInputState(this.Listner, this.Input));
     }
 }

@@ -9,18 +9,21 @@ public class IdleInputState : InputState
         
     }
 
-    override public void Begin()
+    override public void Begin(Vector2 pos)
     {
         //Debug.Log("Idle");
-        Listner.ChangeState(new CallibrationInputState(this.Listner,this.Input));
+        if (Vector2.Distance(new Vector2(2f, -4f), pos) <= 1)
+        {
+            Listner.ChangeState(new CallibrationInputState(this.Listner, this.Input));
+        }
     }
 
-    public override void End()
+    public override void End(Touch _touch)
     {
         //throw new System.NotImplementedException();
     }
 
-    public override void Move()
+    public override void Move(Touch _touch)
     {
         //throw new System.NotImplementedException();
     }

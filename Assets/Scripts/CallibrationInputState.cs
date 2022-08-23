@@ -10,12 +10,12 @@ public class CallibrationInputState : InputState
         
     }
 
-    public override void Begin()
+    public override void Begin(Vector2 pos)
     {
         //throw new System.NotImplementedException();
     }
 
-    public override void End()
+    public override void End(Touch _touch)
     {
         //base.End();
         //tap
@@ -25,11 +25,12 @@ public class CallibrationInputState : InputState
         
     }
 
-    public override void Move()
+    public override void Move(Touch _touch)
     {
         //base.Move();
         //Debug.Log("Begun Moving");
-        
+        //Input.DragStart(_touch);
+        Input.Raise(_touch);
         Listner.ChangeState(new MovingInputState(this.Listner, this.Input));
     }
 }

@@ -10,6 +10,7 @@ public class BoardBuider : MonoBehaviour
     public float SizeRows;
     public float SizeColumns;
     private Node H;
+    Dictionary<string, Node> HexDictionary = new Dictionary<string, Node>();
 
     private void Start()
     {
@@ -40,9 +41,27 @@ public class BoardBuider : MonoBehaviour
                 H = Hex.gameObject.GetComponent<Node>();
                 H.SetCOOR(row,column);
                 H.SetVal(0);
+                H.SetPos(new Vector2(FinalRowPos, column* _yOffset));
                 Hex.transform.SetParent(this.transform);
+                HexDictionary.Add(Hex.name, H);
             }
 
         }
     }
+
+    public Vector3 GetNearest(Vector2 pos)
+    {
+        foreach (var pair in HexDictionary)
+        {
+            float distance = Vector2.Distance(pos, pair.Value.Position);
+            if (distance < 0.5f)
+            {
+                Vector2 loc = pair.Value.Position;
+                return loc;
+            }
+        }
+
+        return new Vector3(2f, -4f, 0f);
+    }
+
 }
