@@ -10,7 +10,9 @@ public class BoardBuider : MonoBehaviour
     public float SizeRows;
     public float SizeColumns;
     private Node H;
-    Dictionary<string, Node> HexDictionary = new Dictionary<string, Node>();
+    public Dictionary<string, Node> HexDictionary = new Dictionary<string, Node>();
+    private GameObject _pair;
+    private GameObject _pair2;
 
     private void Start()
     {
@@ -51,17 +53,91 @@ public class BoardBuider : MonoBehaviour
 
     public Vector3 GetNearest(Vector2 pos)
     {
+        
         foreach (var pair in HexDictionary)
         {
             float distance = Vector2.Distance(pos, pair.Value.Position);
-            if (distance < 0.5f)
+            if (distance < 0.5f && pair.Value.state == false)
             {
                 Vector2 loc = pair.Value.Position;
+               
+                //pair.Value.state = true;
+                
                 return loc;
             }
+            
         }
 
         return new Vector3(2f, -4f, 0f);
+    }
+    public void HighLight(Vector2 pos)
+    {
+        foreach (var pair in HexDictionary)
+        {
+            float distance = Vector2.Distance(pos, pair.Value.Position);
+            if (distance < 0.5f && pair.Value.state == false)
+            {
+                //Vector2 loc = pair.Value.Position;
+                pair.Value.GetComponent<SpriteRenderer>().color = Color.green;
+                //pair.Value.state = true;
+                //return loc;
+            }
+            if (distance >= 0.5f)
+            {
+                pair.Value.GetComponent<SpriteRenderer>().color = Color.white;
+            }
+        }
+
+        //return new Vector3(2f, -4f, 0f);
+    }
+    public void HighLightTwin(Vector2 pos, Vector2 delta)
+    {
+        Node TileOne=null;
+        Node TileTwo=null;
+
+
+        foreach (var pair in HexDictionary)
+        {
+            float distance = Vector2.Distance(pos, pair.Value.Position);
+            
+            
+            if (distance < 0.5f && pair.Value.state == false)
+            {
+                TileOne = pair.Value;
+                foreach (var pair2 in HexDictionary)
+                {
+                    if (TileOne != pair2.Value)
+                    { 
+                        if (((pair2.Value.Position - (Vector2)(pos + delta)).magnitude < 0.45f) && pair2.Value.state == false)
+                        {
+                                TileTwo = pair2.Value;
+                                break;
+                        }
+                        
+                    }
+                }
+
+                break;
+            }
+          
+        }
+        
+        foreach(var pair in HexDictionary)
+        {
+            if (TileOne != null && TileTwo != null && (pair.Value == TileOne || pair.Value == TileTwo) )
+            {
+                //Vector2 loc = pair.Value.Position;
+                pair.Value.GetComponent<SpriteRenderer>().color = Color.green;
+                //pair.Value.state = true;
+                //return loc;
+            }
+            else
+            {
+                pair.Value.GetComponent<SpriteRenderer>().color = Color.white;
+            }
+        }
+
+        //return new Vector3(2f, -4f, 0f);
     }
 
 }

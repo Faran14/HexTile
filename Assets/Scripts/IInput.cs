@@ -19,5 +19,7 @@ public interface IInput
     public void DragEnd(Touch _touch);
     public void Snap(Touch _touch);
     public void Raise(Touch _touch);
+    public void SnapTwo(Touch _touch);
+    public void Spawn();
 
 }

@@ -12,8 +12,16 @@ public class Node : MonoBehaviour
     private SpriteRenderer _sP;
     public List<Sprite> SpriteList = new List<Sprite>();
     public Vector2 Position;
-    
 
+
+    private int _originalSortingOrder;
+
+    private void Start()
+    {
+        state = false;
+        _originalSortingOrder = _sP.sortingOrder;
+        
+    }
 
     public void SetCOOR(float x, float y)
     {
@@ -36,14 +44,29 @@ public class Node : MonoBehaviour
 
 
 
-    public void Upgrade()    
+    public void Upgrade(int type)    
     {
        
          _sP = gameObject.GetComponent<SpriteRenderer>();
-        _sP.sprite = SpriteList[Value];
+        _sP.sprite = SpriteList[type];
         
 
 
+    }
+
+    public void IncreaseSortingOrder()
+    {
+        SetSortingOrder(_sP.sortingOrder + 1);
+    }
+
+    public void SetSortingOrder(int sortingOrder)
+    {
+        _sP.sortingOrder = sortingOrder;
+    }
+
+    public void ResetSortingOrder()
+    {
+        SetSortingOrder(_originalSortingOrder);
     }
 
    

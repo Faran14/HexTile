@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2920527321700798367}
   - component: {fileID: -5811750586329696097}
   m_Layer: 0
-  m_Name: Hex
+  m_Name: Hex 1
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -2135585597343286014, guid: 5aa8b770bc43046bc8d993d0d5b7f4a5, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 8f2e9210df1aa4c5a9071d1d265a9664, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,7 +102,11 @@ MonoBehaviour:
   Y_COOR: 0
   Value: 0
   state: 0
-  SpriteList: []
+  SpriteList:
+  - {fileID: 21300000, guid: 61fc7f78745814a68a7d4cbb34a2f558, type: 3}
+  - {fileID: 21300000, guid: 45af152de222a466f96e53bf098fa508, type: 3}
+  - {fileID: 21300000, guid: 5614a6aed75384b76b51af5fe1a85aca, type: 3}
+  - {fileID: 21300000, guid: d75f4a25ea744494faf118d5085919f6, type: 3}
   Position: {x: 0, y: 0}
 --- !u!60 &-5811750586329696097
 PolygonCollider2D:
@@ -121,7 +125,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8828125, y: 1}
+    oldSize: {x: 0.89606744, y: 1.0898876}
     newSize: {x: 0.8828125, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
