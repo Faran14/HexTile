@@ -13,6 +13,7 @@ public class BoardBuider : MonoBehaviour
     public Dictionary<string, Node> HexDictionary = new Dictionary<string, Node>();
     private GameObject _pair;
     private GameObject _pair2;
+    private int _count=0;
 
     private void Start()
     {
@@ -43,6 +44,8 @@ public class BoardBuider : MonoBehaviour
                 H = Hex.gameObject.GetComponent<Node>();
                 H.SetCOOR(row,column);
                 H.SetVal(0);
+                H.SetIndex(_count);
+                _count = _count + 1;
                 H.SetPos(new Vector2(FinalRowPos, column* _yOffset));
                 Hex.transform.SetParent(this.transform);
                 HexDictionary.Add(Hex.name, H);
@@ -60,9 +63,9 @@ public class BoardBuider : MonoBehaviour
             if (distance < 0.5f && pair.Value.state == false)
             {
                 Vector2 loc = pair.Value.Position;
-               
+
                 //pair.Value.state = true;
-                
+                pair.Value.transform.GetChild(0).gameObject.SetActive(false);
                 return loc;
             }
             
@@ -78,13 +81,15 @@ public class BoardBuider : MonoBehaviour
             if (distance < 0.5f && pair.Value.state == false)
             {
                 //Vector2 loc = pair.Value.Position;
-                pair.Value.GetComponent<SpriteRenderer>().color = Color.green;
+                //pair.Value.GetComponent<SpriteRenderer>().color = Color.green;
+                pair.Value.transform.GetChild(0).gameObject.SetActive(true);
                 //pair.Value.state = true;
                 //return loc;
             }
             if (distance >= 0.5f)
             {
-                pair.Value.GetComponent<SpriteRenderer>().color = Color.white;
+                //pair.Value.GetComponent<SpriteRenderer>().color = Color.white;
+                pair.Value.transform.GetChild(0).gameObject.SetActive(false);
             }
         }
 
@@ -127,17 +132,24 @@ public class BoardBuider : MonoBehaviour
             if (TileOne != null && TileTwo != null && (pair.Value == TileOne || pair.Value == TileTwo) )
             {
                 //Vector2 loc = pair.Value.Position;
-                pair.Value.GetComponent<SpriteRenderer>().color = Color.green;
+                //pair.Value.GetComponent<SpriteRenderer>().color = Color.green;
+                pair.Value.transform.GetChild(0).gameObject.SetActive(true);
                 //pair.Value.state = true;
                 //return loc;
             }
             else
             {
-                pair.Value.GetComponent<SpriteRenderer>().color = Color.white;
+                //pair.Value.GetComponent<SpriteRenderer>().color = Color.white;
+                pair.Value.transform.GetChild(0).gameObject.SetActive(false);
             }
         }
 
         //return new Vector3(2f, -4f, 0f);
+    }
+
+    public void DisableHighLight()
+    {
+
     }
 
 }

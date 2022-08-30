@@ -11,16 +11,21 @@ public class Tray : MonoBehaviour, IInput
     public Camera _cam;
     private Vector2 _returnLocation;
     private BoardBuider _board;
+    private GridController _grid;
     private Vector3 _snapLocation;
     private Vector3 _snapLocationNeighbour;
     private Vector2 _offSetPosition;
     private GameObject _child;
+    private GameObject _childToDes;
+    private GameObject _childToDes2;
     public GameObject _hexHolder;// this is temp, only for testing
     [SerializeField] private GameObject HexPrefab;//testing
     private Vector2 _child1Pos;
     private Vector2 _child2Pos;
     private Vector2 _delta;
     private Node _node;
+    public GameObject Arrow1;
+    public GameObject Arrow2;
 
     private void Start()
     {
@@ -29,9 +34,10 @@ public class Tray : MonoBehaviour, IInput
         Spawn();
 
     }
-    public void Initialize(BoardBuider board)
+    public void Initialize(BoardBuider board, GridController grid)
     {
         _board = board;
+        _grid = grid;
     }
 
     public void Tap()
@@ -101,11 +107,15 @@ public class Tray : MonoBehaviour, IInput
                 //Debug.LogError(pair.Value);
                 _node.SetState(true);
                 pair.Value.SetState(true);
-
+                _node.transform.GetChild(0).gameObject.SetActive(false);
+                pair.Value.transform.GetChild(0).gameObject.SetActive(false);
+                _grid.SetHex(HexTray.transform.GetChild(0).GetComponent<Node>(), _node._index);//set node in array
+                _grid.SetHex(HexTray.transform.GetChild(1).GetComponent<Node>(), pair.Value._index);//set node in array
                 HexTray.transform.GetChild(0).position = _snapLocation;
                 HexTray.transform.GetChild(1).position = _snapLocationNeighbour;
 
                 _child = HexTray.transform.GetChild(0).gameObject;//changing parent of tile
+
                 _child.GetComponent<Node>().ResetSortingOrder();
                 _child.transform.SetParent(_hexHolder.transform);
                 _child = HexTray.transform.GetChild(0).gameObject;//changing parent of tile
@@ -134,7 +144,15 @@ public class Tray : MonoBehaviour, IInput
             if (_snapLocation != new Vector3(2f, -4f, 0f))
             {
                 HexTray.transform.position = _snapLocation;
+                foreach (var pair in _board.HexDictionary)
+                {
+                    if (((pair.Value.Position - (Vector2)_snapLocation).magnitude < 0.45f) && pair.Value.state == false)
+                    {
+                        pair.Value.SetState(true);
+                        _grid.SetHex(HexTray.transform.GetChild(0).GetComponent<Node>(), pair.Value._index);
+                    }
 
+                }
 
                 _child = HexTray.transform.GetChild(0).gameObject;//changing parent of tile
                 _child.GetComponent<Node>().ResetSortingOrder();
@@ -166,6 +184,8 @@ public class Tray : MonoBehaviour, IInput
         Debug.Log(choice);
         if (choice > 0)
         {
+            Arrow1.SetActive(false);
+            Arrow2.SetActive(false);
             GameObject Hex = (GameObject)Instantiate(HexPrefab, new Vector2(2f, -4f), Quaternion.identity);//spawning new tile
             Hex.GetComponent<Node>().Upgrade(Tile1);
             Hex.transform.SetParent(HexTray.transform);
@@ -177,6 +197,8 @@ public class Tray : MonoBehaviour, IInput
         }
         else
         {
+            Arrow1.SetActive(true);
+            Arrow2.SetActive(true);
             GameObject Hex = (GameObject)Instantiate(HexPrefab, new Vector2(2f, -4f), Quaternion.identity);//spawning new tile
             Hex.GetComponent<Node>().Upgrade(Tile1);
             Hex.transform.SetParent(HexTray.transform);
@@ -204,5 +226,32 @@ public class Tray : MonoBehaviour, IInput
 
     }
 
+    public void Skip()
+    {
+        if (HexTray.transform.childCount > 1)
+        {
+            _childToDes = HexTray.transform.GetChild(0).gameObject;
+            _childToDes.SetActive(false);
+            _childToDes2 = HexTray.transform.GetChild(1).gameObject;
+            _childToDes2.SetActive(false);
+            HexTray.transform.DetachChildren();
+
+            Destroy(_childToDes);
+            Destroy(_childToDes2);
+
+
+        }
+        else
+        {
+            _child = HexTray.transform.GetChild(0).gameObject;
+            _child.SetActive(false);
+            HexTray.transform.DetachChildren();
+
+            Destroy(_child);
+        }
+        //HexTray.transform.position = new Vector2(2f, 4f);
+        Spawn();
+
+    }
 
 }

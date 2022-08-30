@@ -12,12 +12,14 @@ public class Node : MonoBehaviour
     private SpriteRenderer _sP;
     public List<Sprite> SpriteList = new List<Sprite>();
     public Vector2 Position;
+    public int _index;
 
 
     private int _originalSortingOrder;
 
     private void Start()
     {
+        _sP = gameObject.GetComponent<SpriteRenderer>();
         state = false;
         _originalSortingOrder = _sP.sortingOrder;
         
@@ -67,6 +69,11 @@ public class Node : MonoBehaviour
     public void ResetSortingOrder()
     {
         SetSortingOrder(_originalSortingOrder);
+    }
+
+    public void SetIndex(int index)
+    {
+        _index = index;
     }
 
    
