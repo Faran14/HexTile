@@ -111,6 +111,9 @@ public class Tray : MonoBehaviour, IInput
                 pair.Value.transform.GetChild(0).gameObject.SetActive(false);
                 _grid.SetHex(HexTray.transform.GetChild(0).GetComponent<Node>(), _node._index);//set node in array
                 _grid.SetHex(HexTray.transform.GetChild(1).GetComponent<Node>(), pair.Value._index);//set node in array
+
+                _grid.MatchThreeHelper(_node._index);
+                _grid.MatchThreeHelper(pair.Value._index);
                 HexTray.transform.GetChild(0).position = _snapLocation;
                 HexTray.transform.GetChild(1).position = _snapLocationNeighbour;
 
@@ -121,6 +124,7 @@ public class Tray : MonoBehaviour, IInput
                 _child = HexTray.transform.GetChild(0).gameObject;//changing parent of tile
                 _child.GetComponent<Node>().ResetSortingOrder();
                 _child.transform.SetParent(_hexHolder.transform);
+                
                 Spawn();
                 break;
             }
@@ -150,6 +154,7 @@ public class Tray : MonoBehaviour, IInput
                     {
                         pair.Value.SetState(true);
                         _grid.SetHex(HexTray.transform.GetChild(0).GetComponent<Node>(), pair.Value._index);
+                        _grid.MatchThreeHelper(pair.Value._index);
                     }
 
                 }
@@ -181,7 +186,7 @@ public class Tray : MonoBehaviour, IInput
         var choice = Random.Range(0, 2);
         var Tile1 = Random.Range(0, 4);
         var Tile2 = Random.Range(0,4);
-        Debug.Log(choice);
+        //Debug.Log(choice);
         if (choice > 0)
         {
             Arrow1.SetActive(false);

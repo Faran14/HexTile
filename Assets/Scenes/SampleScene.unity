@@ -532,6 +532,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 796588284}
+  - component: {fileID: 796588285}
   m_Layer: 0
   m_Name: Arrows
   m_TagString: Untagged
@@ -556,6 +557,26 @@ Transform:
   m_Father: {fileID: 452207099}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &796588285
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796588283}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0598b9f54a1894c1b9df0a4c0128fe69, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &891155497
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,6 +1185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1418228363}
   - component: {fileID: 1418228362}
+  - component: {fileID: 1418228364}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1186,6 +1208,7 @@ MonoBehaviour:
   _IS: {fileID: 1528509660}
   _TS: {fileID: 452207100}
   _BB: {fileID: 639393087}
+  _GC: {fileID: 1418228364}
 --- !u!4 &1418228363
 Transform:
   m_ObjectHideFlags: 0
@@ -1201,6 +1224,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1418228364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418228361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86931fbc6189417692b33e036046f4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hexArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _IndexList: 
 --- !u!1 &1528509657
 GameObject:
   m_ObjectHideFlags: 0

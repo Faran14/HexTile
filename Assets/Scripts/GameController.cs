@@ -13,6 +13,6 @@ public class GameController : MonoBehaviour
     {
         _IS.Initialize(_TS);
         _TS.Initialize(_BB,_GC);
-
+        _GC.Initialize(_BB);
     }
 }

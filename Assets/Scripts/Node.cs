@@ -44,13 +44,22 @@ public class Node : MonoBehaviour
     }
 
 
-
+    public void UpgradeHelper()
+    {
+        if (Value + 1 < SpriteList.Count)
+        {
+            Value = Value + 1;
+            Debug.Log("VAyfdwggd8e3hfi4fufg" + Value);
+            Upgrade(Value);
+        }
+    }
 
     public void Upgrade(int type)    
     {
        
          _sP = gameObject.GetComponent<SpriteRenderer>();
         _sP.sprite = SpriteList[type];
+        SetVal(type);
         
 
 
@@ -76,5 +85,11 @@ public class Node : MonoBehaviour
         _index = index;
     }
 
-   
+   public void VanishTheHex()
+    {
+        //transform.parent = null;
+        transform.gameObject.SetActive(false);
+        //Destroy(transform.gameObject);
+    }
+
 }
