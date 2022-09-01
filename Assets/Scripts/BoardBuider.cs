@@ -37,6 +37,7 @@ public class BoardBuider : MonoBehaviour
                 if ((column % 2 == 1)&& (row== SR-1))
                 {
                     _count = _count + 1;
+
                     continue;
                 }
 
