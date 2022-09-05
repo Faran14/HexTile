@@ -8,4 +8,9 @@ public class Retry : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void exit()
+    {
+        SceneManager.LoadScene(1);
+    }
 }
