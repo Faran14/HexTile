@@ -757,7 +757,9 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: LK_HAS_LION_ANALYTICS;LK_HAS_LION_ADS;LK_HAS_LION_GDPR;HAS_LION_APPLOVIN_SDK;HAS_APPLOVIN_CROSS_PROMO_SDK
+    iPhone: LK_HAS_LION_ANALYTICS;LK_HAS_LION_ADS;LK_HAS_LION_GDPR
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
