@@ -183,8 +183,8 @@ MonoBehaviour:
   PrevButton: {fileID: 0}
   NextButton: {fileID: 0}
   transitionSpeed: 7.5
-  UseHardSwipe: 0
-  UseFastSwipe: 1
+  UseHardSwipe: 1
+  UseFastSwipe: 0
   UseSwipeDeltaThreshold: 1
   FastSwipeThreshold: 100
   SwipeVelocityThreshold: 100
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Content: {fileID: 471183503}
   m_Horizontal: 1
   m_Vertical: 0
-  m_MovementType: 2
+  m_MovementType: 1
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -248,15 +248,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.2627451, g: 0.3921569, b: 0.09019608, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 99d0e4aebfa53614e99990db3b0371fd, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
