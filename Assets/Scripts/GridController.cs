@@ -10,6 +10,7 @@ public class GridController : FindMatchHelper
     private int _matchCount;
     private BoardBuider _board;
     private bool _casHelper;
+    [SerializeField]private GameObject _failImage;
     
     public void Start()
     {
@@ -18,8 +19,10 @@ public class GridController : FindMatchHelper
         //    __hexArray[i] = null;
         //}
         _matchCount = 0;
+        _failImage.SetActive(false);
 
     }
+    
     public void Initialize(BoardBuider board)
     {
         _board = board;
@@ -28,6 +31,19 @@ public class GridController : FindMatchHelper
     public void SetHex(Node Hex, int index)
     {
         _hexArray[index] = Hex;
+    }
+
+    public bool LevelFail()
+    {
+        foreach (var pair in _board.HexDictionary)
+        {
+            if (pair.Value.state == false)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
     public void MatchThreeHelper(int index)
     {
@@ -53,6 +69,15 @@ public class GridController : FindMatchHelper
         _matchCount = 0;
         //_casHelper = _IndexList[0];
         _IndexList.Clear();
+        if (LevelFail())
+        {
+            Debug.Log("Fail");
+            _failImage.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Succ");
+        }
         
 
 

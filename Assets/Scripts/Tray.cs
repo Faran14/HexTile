@@ -27,6 +27,8 @@ public class Tray : MonoBehaviour, IInput
     public GameObject Arrow1;
     public GameObject Arrow2;
 
+    [SerializeField] private AdHandler AdHandler;
+
     private void Start()
     {
         _cam = Camera.main;
@@ -233,6 +235,13 @@ public class Tray : MonoBehaviour, IInput
 
     public void Skip()
     {
+        AdHandler.RewardedAd();
+        
+
+    }
+    public void SkipHelper()
+    {
+        Debug.Log("Skip");
         if (HexTray.transform.childCount > 1)
         {
             _childToDes = HexTray.transform.GetChild(0).gameObject;
@@ -256,7 +265,6 @@ public class Tray : MonoBehaviour, IInput
         }
         //HexTray.transform.position = new Vector2(2f, 4f);
         Spawn();
-
     }
 
 }

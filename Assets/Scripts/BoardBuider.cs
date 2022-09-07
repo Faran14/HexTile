@@ -10,7 +10,7 @@ public class BoardBuider : MonoBehaviour
     public float SizeRows;
     public float SizeColumns;
     private Node H;
-    public Dictionary<string, Node> HexDictionary = new Dictionary<string, Node>();
+    [SerializeField]public Dictionary<string, Node> HexDictionary = new Dictionary<string, Node>();
     private GameObject _pair;
     private GameObject _pair2;
     private int _count=0;
