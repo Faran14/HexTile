@@ -155,6 +155,7 @@ public class Tray : MonoBehaviour, IInput
                     if (((pair.Value.Position - (Vector2)_snapLocation).magnitude < 0.45f) && pair.Value.state == false)
                     {
                         pair.Value.SetState(true);
+                        HexTray.transform.GetChild(0).GetComponent<Node>().SetCOOR(pair.Value.X_COOR,pair.Value.Y_COOR);
                         _grid.SetHex(HexTray.transform.GetChild(0).GetComponent<Node>(), pair.Value._index);
                         _grid.MatchThreeHelper(pair.Value._index);
                     }
