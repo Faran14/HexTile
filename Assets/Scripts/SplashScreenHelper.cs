@@ -4,16 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using UM.Store;
 
 public class SplashScreenHelper : MonoBehaviour
 {
     public TMP_Text _text;
     public Image bar;
+    public IAPstore Store;
     // Start is called before the first frame update
     void Start()
     {
         bar.fillAmount = 0;
         StartCoroutine(LoadScene());
+        Store.Initialize();
+
     }
 
     IEnumerator LoadScene()

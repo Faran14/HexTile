@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="639141c3-fbeb-4d2b-bd56-6062380dfd7c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/IAPProductCatalog.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/IAPProductCatalog.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MenuScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SplashScreen.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SplashScreen.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AdHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AdHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AdTimer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AdTimer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inputs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Inputs.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Retry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Retry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SplashScreenHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SplashScreenHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tray.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tray.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/R_btn_green (1).png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/R_btn_green (1).png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/store sprites/B-GreenColor.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/store sprites/B-GreenColor.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/store sprites/Circle-M.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/store sprites/Circle-M.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="2F2CbYquCA99yNiXkI5UK51nPfp" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "rider.run.widget.enabled.cache": "false"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <created>1663680867947</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1663680867947</updated>
+      <workItem from="1663680886085" duration="3000" />
+    </task>
+    <servers />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>

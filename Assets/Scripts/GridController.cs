@@ -11,6 +11,7 @@ public class GridController : FindMatchHelper
     private BoardBuider _board;
     private bool _casHelper;
     [SerializeField]private GameObject _failImage;
+    [SerializeField] private InputFlag _inputFlag;
     
     public void Start()
     {
@@ -72,6 +73,7 @@ public class GridController : FindMatchHelper
         if (LevelFail())
         {
             Debug.Log("Fail");
+            _inputFlag.SetFlag(false);
             _failImage.SetActive(true);
         }
         else
@@ -132,12 +134,16 @@ public class GridController : FindMatchHelper
             {
                 if (_hexArray[index + Left] != null && _hexArray[index].Value == _hexArray[index + Left].Value )
                 {
-                    Debug.Log("left");
+                    if ((_hexArray[index + Left].Y_COOR <= _hexArray[index].Y_COOR +1)&& (_hexArray[index + Left].Y_COOR >= _hexArray[index].Y_COOR - 1))
+                    {
+                        Debug.Log("left");
 
-                    _match = true;
-                    _matchCount = _matchCount + 1;
+                        _match = true;
+                        _matchCount = _matchCount + 1;
 
-                    MatchThree(index + Left);
+                        MatchThree(index + Left);
+                    }
+                    
                 }
             }
         }
@@ -148,11 +154,13 @@ public class GridController : FindMatchHelper
                 {
                 if (_hexArray[index + TopLeft(index)] != null && _hexArray[index].Value == _hexArray[index + TopLeft(index)].Value)
                 {
+                    if ((_hexArray[index + TopLeft(index)].Y_COOR <= _hexArray[index].Y_COOR + 1) && (_hexArray[index + TopLeft(index)].Y_COOR >= _hexArray[index].Y_COOR - 1))
+                    {
+                        _match = true;
+                        _matchCount = _matchCount + 1;
 
-                    _match = true;
-                    _matchCount = _matchCount + 1;
-
-                    MatchThree(index + TopLeft(index));
+                        MatchThree(index + TopLeft(index));
+                    }
                 }
             }
         }
@@ -163,11 +171,13 @@ public class GridController : FindMatchHelper
             {
                 if (_hexArray[index + TopRight(index)] != null && _hexArray[index].Value == _hexArray[index + TopRight(index)].Value )
                 {
+                    if ((_hexArray[index + TopRight(index)].Y_COOR <= _hexArray[index].Y_COOR + 1) && (_hexArray[index + TopRight(index)].Y_COOR >= _hexArray[index].Y_COOR - 1))
+                    {
+                        _match = true;
+                        _matchCount = _matchCount + 1;
 
-                    _match = true;
-                    _matchCount = _matchCount + 1;
-
-                    MatchThree(index + TopRight(index));
+                        MatchThree(index + TopRight(index));
+                    }
                 }
             }
         }
@@ -178,11 +188,13 @@ public class GridController : FindMatchHelper
             {
                 if (_hexArray[index + Right] != null && _hexArray[index].Value == _hexArray[index + Right].Value )
                 {
+                    if ((_hexArray[index + Right].Y_COOR <= _hexArray[index].Y_COOR + 1) && (_hexArray[index + Right].Y_COOR >= _hexArray[index].Y_COOR - 1))
+                    {
+                        _match = true;
+                        _matchCount = _matchCount + 1;
 
-                    _match = true;
-                    _matchCount = _matchCount + 1;
-
-                    MatchThree(index + Right);
+                        MatchThree(index + Right);
+                    }
                 }
             }
         }
@@ -193,11 +205,13 @@ public class GridController : FindMatchHelper
             {
                 if (_hexArray[index + BottomRight(index)] != null && _hexArray[index].Value == _hexArray[index + BottomRight(index)].Value )
                 {
+                    if ((_hexArray[index + BottomRight(index)].Y_COOR <= _hexArray[index].Y_COOR + 1) && (_hexArray[index + BottomRight(index)].Y_COOR >= _hexArray[index].Y_COOR - 1))
+                    {
+                        _match = true;
+                        _matchCount = _matchCount + 1;
 
-                    _match = true;
-                    _matchCount = _matchCount + 1;
-
-                    MatchThree(index + BottomRight(index));
+                        MatchThree(index + BottomRight(index));
+                    }
                 }
             }
         }
@@ -207,11 +221,13 @@ public class GridController : FindMatchHelper
             {
                 if (_hexArray[index + BottomLeft(index)] != null && _hexArray[index].Value == _hexArray[index + BottomLeft(index)].Value )
                 {
+                    if ((_hexArray[index + BottomLeft(index)].Y_COOR <= _hexArray[index].Y_COOR + 1) && (_hexArray[index + BottomLeft(index)].Y_COOR >= _hexArray[index].Y_COOR - 1))
+                    {
+                        _match = true;
+                        _matchCount = _matchCount + 1;
 
-                    _match = true;
-                    _matchCount = _matchCount + 1;
-
-                    MatchThree(index + BottomLeft(index));
+                        MatchThree(index + BottomLeft(index));
+                    }
                 }
             }
         }

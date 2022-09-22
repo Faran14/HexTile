@@ -2,19 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class AdHandler : MonoBehaviour
+[CreateAssetMenu(fileName = "AdHandler", menuName = "ScriptableObjects/AdHandler", order = 1)]
+public class AdHandler : ScriptableObject
 {
     private const string MaxKey = "hlKffQFn1sKXRefAUUKG4o-i-OOURETonfImCKvE29oyDwftIiyhVZMlNNxwUFl8NgUmynX33XOEq5m09yb34Z";
     private const string RewardedAdUnit = "585f249ad115c420";
     private const string InterstitialAdUnit = "7d62e5180461f57a";
     private const string BannerAdUnit = "b56d58800dadb2d1";
-    [SerializeField] private Tray _skipButton;
-    [SerializeField] private Retry _exitButton;
     private int count = 0;
-    [SerializeField] private AdTimer lastAdTimer;
+    public Float lastAdTimer;
+    [SerializeField] private RewardHandler _rewardHandler;
+    public Action RewardAction;
+    public Action ExitAction;
+    private int retryAttempt;
+    [SerializeField] private GameObject failPopup;
     //this is temp
-
+    //private void Awake()
+    //{
+    //    DontDestroyOnLoad(this);
+    //}
     //[SerializeField] long lastAdTimer;
 
     [SerializeField]long CurrentTime
@@ -38,7 +44,7 @@ public class AdHandler : MonoBehaviour
     //    lastAdTimer = CurrentTime;
     //}
 
-    private void Start()
+    public void Initialze()
     {
         string[] adUnitIds = {
             // rewarded
@@ -47,6 +53,7 @@ public class AdHandler : MonoBehaviour
             InterstitialAdUnit,
             // banner
             BannerAdUnit
+
         };
 
         MaxSdk.SetSdkKey(MaxKey);
@@ -55,11 +62,14 @@ public class AdHandler : MonoBehaviour
         MaxSdkCallbacks.OnSdkInitializedEvent += OnMaxInitialized;
         MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent += OnRewardedAdReceivedRewardEvent;
         MaxSdkCallbacks.Interstitial.OnAdHiddenEvent += OnInterstitialHiddenEvent;
-
+        MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent += OnInterstitialLoadFailedEvent;
+        MaxSdkCallbacks.Rewarded.OnAdLoadFailedEvent += OnRewardedAdLoadFailedEvent;
         MaxSdk.InitializeSdk(adUnitIds);
 
         MaxSdk.LoadInterstitial(InterstitialAdUnit);
         MaxSdk.LoadRewardedAd(RewardedAdUnit);
+        
+        
     }
 
     private void OnDestroy()
@@ -68,6 +78,7 @@ public class AdHandler : MonoBehaviour
         MaxSdkCallbacks.OnSdkInitializedEvent -= OnMaxInitialized;
         MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent -= OnRewardedAdReceivedRewardEvent;
         MaxSdkCallbacks.Interstitial.OnAdHiddenEvent -= OnInterstitialHiddenEvent;
+        MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent -= OnInterstitialLoadFailedEvent;
     }
 
 
@@ -76,18 +87,52 @@ public class AdHandler : MonoBehaviour
         Debug.LogError($"{reward.Amount} : {reward.Label}");
         //this call back fires two events on claim// need help
         //temp solution is count check
+        lastAdTimer.SetValue(CurrentTime);
+        MaxSdk.LoadRewardedAd(RewardedAdUnit);
+        //_skipButton.SkipHelper();
+        RewardAction?.Invoke();
+        RewardAction = null;
         
-            _skipButton.SkipHelper();
-
-       
     }
+
+    private void OnInterstitialLoadFailedEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo)
+    {
+        // Interstitial ad failed to load 
+        // AppLovin recommends that you retry with exponentially higher delays, up to a maximum delay (in this case 64 seconds)
+        //Debug.LogError("OnInterstitialLoadFailedEvent");
+        retryAttempt++;
+        double retryDelay = Math.Pow(2, Math.Min(6, retryAttempt));
+        Debug.LogError("No reward");
+        failPopup.SetActive(true);
+        //Invoke("LoadInterstitial", (float)retryDelay);
+        MaxSdk.LoadInterstitial(InterstitialAdUnit);
+        
+
+    }
+    private void OnRewardedAdLoadFailedEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo)
+    {
+        // Interstitial ad failed to load 
+        // AppLovin recommends that you retry with exponentially higher delays, up to a maximum delay (in this case 64 seconds)
+        //Debug.LogError("OnInterstitialLoadFailedEvent");
+        retryAttempt++;
+        double retryDelay = Math.Pow(2, Math.Min(6, retryAttempt));
+        failPopup.SetActive(true);
+        //Invoke("LoadInterstitial", (float)retryDelay);
+      
+        MaxSdk.LoadRewardedAd(RewardedAdUnit);
+
+    }
+
+
     private void OnInterstitialHiddenEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
     {
         // Interstitial ad is hidden. Pre-load the next ad.
         //LoadInterstitial();
-        lastAdTimer.SetTimer(CurrentTime);
+        lastAdTimer.SetValue(CurrentTime);
         MaxSdk.LoadInterstitial(InterstitialAdUnit);
-        _exitButton.exit();
+        //_exitButton.exit();
+        ExitAction?.Invoke();
+        ExitAction = null;
     }
 
 
@@ -106,8 +151,10 @@ public class AdHandler : MonoBehaviour
         }
     }
     
-    public void RewardedAd()
+    public void RewardedAd(Action callBack, GameObject popup)
     {
+        failPopup = popup;
+        RewardAction = callBack;
         //Debug.Log("IN function");
         MaxSdk.LoadRewardedAd(RewardedAdUnit);
         if (MaxSdk.IsRewardedAdReady(RewardedAdUnit))
@@ -116,13 +163,16 @@ public class AdHandler : MonoBehaviour
 
         }
     }
-    public void InterAd()
+    public void InterAd(Action callBack, GameObject popup)
     {
-        Debug.Log("IN function");
+        failPopup = popup;
+        //failPopup.SetActive(false);
+        ExitAction = callBack;
+        //Debug.Log("IN function");
         MaxSdk.LoadInterstitial(InterstitialAdUnit);
         if (MaxSdk.IsInterstitialReady(InterstitialAdUnit))
         {
-            if (lastAdTimer.GetTimer() + 30 < CurrentTime)
+            if (lastAdTimer.GetValue() + 30 < CurrentTime && _rewardHandler.Check(RewardType.ad)== false)
             {
                 //Debug.LogError(lastAdTimer.GetTimer()) ;
                 MaxSdk.ShowInterstitial(InterstitialAdUnit);
@@ -131,7 +181,8 @@ public class AdHandler : MonoBehaviour
             else
             {
 
-                _exitButton.exit();
+                //_exitButton.exit();
+                ExitAction();
             }
         }
 

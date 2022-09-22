@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Tray : MonoBehaviour, IInput
 {
     public GameObject HexTray;
@@ -26,15 +26,22 @@ public class Tray : MonoBehaviour, IInput
     private Node _node;
     public GameObject Arrow1;
     public GameObject Arrow2;
-
     [SerializeField] private AdHandler AdHandler;
+    [SerializeField] private GameObject popup;
+    [SerializeField] private IAPPowerUp _skip;
+    [SerializeField] private TMP_Text _skipText;
 
     private void Start()
     {
         _cam = Camera.main;
         _returnLocation =new Vector2 (2f, -4f);
+        AdHandler.Initialze();
         Spawn();
+    }
 
+    private void Update()
+    {
+        _skipText.text = _skip.GetAmount().ToString(); 
     }
     public void Initialize(BoardBuider board, GridController grid)
     {
@@ -111,6 +118,8 @@ public class Tray : MonoBehaviour, IInput
                 pair.Value.SetState(true);
                 _node.transform.GetChild(0).gameObject.SetActive(false);
                 pair.Value.transform.GetChild(0).gameObject.SetActive(false);
+                HexTray.transform.GetChild(0).GetComponent<Node>().SetCOOR(_node.X_COOR, _node.Y_COOR);
+                HexTray.transform.GetChild(1).GetComponent<Node>().SetCOOR(pair.Value.X_COOR, pair.Value.Y_COOR);
                 _grid.SetHex(HexTray.transform.GetChild(0).GetComponent<Node>(), _node._index);//set node in array
                 _grid.SetHex(HexTray.transform.GetChild(1).GetComponent<Node>(), pair.Value._index);//set node in array
 
@@ -236,13 +245,29 @@ public class Tray : MonoBehaviour, IInput
 
     public void Skip()
     {
-        AdHandler.RewardedAd();
-        
-
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            popup.SetActive(true);
+            return;
+        }
+        if (_skip.GetAmount()<=0 )
+        {
+            AdHandler.RewardedAd(addSkip, popup);
+        }
+        else
+        {
+            _skip.RemoveAmount(1);
+            SkipHelper();
+        }
+    }
+    public void addSkip()
+    {
+        _skip.AddAmount(1);
     }
     public void SkipHelper()
     {
         Debug.Log("Skip");
+        Debug.LogError(HexTray.transform.childCount);
         if (HexTray.transform.childCount > 1)
         {
             _childToDes = HexTray.transform.GetChild(0).gameObject;

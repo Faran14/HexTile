@@ -5,14 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "AdTimer", menuName = "ScriptableObjects/AdTimer", order =1)]
 public class AdTimer : ScriptableObject
 {
-    public long _timer=0;
+    [SerializeField] private float Timer;
 
-    public void SetTimer(long Timer)
+    public void SetTimer(long timer)
     {
-        _timer = Timer;
+        Debug.LogError(timer + "Time value");
+        Timer = timer;
     }
-    public long GetTimer()
+    public float GetTimer()
     {
-        return _timer;
+        Debug.LogError(Timer+ "Getter value");
+        return Timer;
     }
 }

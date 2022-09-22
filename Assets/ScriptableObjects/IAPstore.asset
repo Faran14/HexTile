@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca77a48c954fa46a28e283a4896985d0, type: 3}
+  m_Name: IAPstore
+  m_EditorClassIdentifier: 
+  IAPItems:
+  - {fileID: 11400000, guid: 5a6ab2ef223634bec8de1cbe2aa098ec, type: 2}
+  - {fileID: 11400000, guid: e2d33f6e9bccc4613ba218951c7e59dd, type: 2}
+  - {fileID: 11400000, guid: ac3d4babe06e249738a412b2fa20aa11, type: 2}
+  - {fileID: 11400000, guid: 1cf0c46a0f1bc48fcad836ffc914e1b1, type: 2}
+  IAPInProgress: 0
+  RewardHandler: {fileID: 11400000, guid: d04ff03851eb347d8a0fc57ad499f28a, type: 2}
+  Prefab: {fileID: 7245619623141519781, guid: 36f4dda9b30904232ad37503af1fef0d, type: 3}

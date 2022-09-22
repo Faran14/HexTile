@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fafdd8f54d6640769ce40ae086aac33, type: 3}
+  m_Name: RewardHandler
+  m_EditorClassIdentifier: 
+  _removeAds: 0
+  _coin: {fileID: 11400000, guid: 355c8790a3f394fdbbd9675f19554ff5, type: 2}
+  _skip: {fileID: 11400000, guid: cee52d7010e6f43479efc26f060bc102, type: 2}

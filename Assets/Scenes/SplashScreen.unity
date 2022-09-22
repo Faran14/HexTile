@@ -528,6 +528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _text: {fileID: 73202525}
   bar: {fileID: 211125426}
+  Store: {fileID: 11400000, guid: 4cbf8d242237b48ecbe146d7b3b8ffdb, type: 2}
 --- !u!114 &241440169
 MonoBehaviour:
   m_ObjectHideFlags: 0

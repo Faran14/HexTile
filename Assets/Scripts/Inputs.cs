@@ -11,7 +11,7 @@ public class Inputs : MonoBehaviour, IInputState
     private IInput _input;
     private Vector2 _touchArea;
     private Camera _cam;
-
+    [SerializeField] private InputFlag _inputFlag; 
 
     public void Initialize(Tray input)
     {
@@ -28,27 +28,30 @@ public class Inputs : MonoBehaviour, IInputState
    
     public void Update()
     {
-        if (Input.touchCount > 0)
+        if (_inputFlag.GetFlag() == true)
         {
-            _touch = Input.GetTouch(0);
-            _touchArea = _cam.ScreenToWorldPoint(_touch.position);
-            if (_touch.phase==TouchPhase.Began)
+            if (Input.touchCount > 0)
             {
-                //Debug.Log("Touch Begin");
-                _state.Begin(_touchArea);
-            }
-            else if (_touch.phase== TouchPhase.Moved)
-            {
-                //Debug.Log("Touch Move");
-                _state.Move(_touch);
-            }
-            else if (_touch.phase == TouchPhase.Ended)
-            {
-                //Debug.Log("Touch End");
-                _state.End(_touch);
-            }
+                _touch = Input.GetTouch(0);
+                _touchArea = _cam.ScreenToWorldPoint(_touch.position);
+                if (_touch.phase == TouchPhase.Began)
+                {
+                    //Debug.Log("Touch Begin");
+                    _state.Begin(_touchArea);
+                }
+                else if (_touch.phase == TouchPhase.Moved)
+                {
+                    //Debug.Log("Touch Move");
+                    _state.Move(_touch);
+                }
+                else if (_touch.phase == TouchPhase.Ended)
+                {
+                    //Debug.Log("Touch End");
+                    _state.End(_touch);
+                }
 
 
+            }
         }
 
     }
